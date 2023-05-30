@@ -4,19 +4,7 @@ import socket
 # Press the green button in the gutter to run the script.
 def handleGet(split):
     print(f"handle GET {split}")
-    headerfield = True
-    i = 1
-    headers = {}
-    while headerfield:
-        i_ = split[i]
-        print(i_)
-        if i_ == '':
-            headerfield = False
-            break
-        i+=1
-        keyValue = i_.split(": ", 1)
-        headers[keyValue[0]] = keyValue[1]
-    print(headers)
+    headers = getHeaders(split)
 
 
 def handleHead(split):
@@ -56,4 +44,21 @@ if __name__ == '__main__':
                     # conn.sendall(b"HTTP/1.1 200 OK\r\n\r\nThis is the body\r\n\r\n")
                     # conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def getHeaders(split) -> dict:
+    headerfield = True
+    i = 1
+    headers = {}
+    while headerfield:
+        i_ = split[i]
+        print(i_)
+        if i_ == '':
+            headerfield = False
+            break
+        i+=1
+        keyValue = i_.split(": ", 1)
+        headers[keyValue[0]] = keyValue[1]
+    print(headers)
+    return headers
+
+
