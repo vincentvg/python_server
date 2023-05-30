@@ -12,9 +12,15 @@ if __name__ == '__main__':
         with conn:
             print(f"Connected by {addr}")
             while True:
-                data = conn.recv(1024)
+                data = conn.recv(2048)
                 if data:
                     print(data)
-                    conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
+                    #HEAD
+                    # conn.sendall(b"HTTP/1.1 200 OK\r\nContent-Length: 20354\r\nLast-Modified: Sun, 18 Jun 2023 00:00:00 GMT\r\nContent-Type: text/html\r\n\r\n")
+
+                    #GET
+                    # conn.sendall(data)
+                    conn.sendall(b"HTTP/1.1 200 OK\r\n\r\nThis is the body\r\n\r\n")
+                    # conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
